@@ -9,6 +9,8 @@ import { getSaltPassword } from 'src/common/util/MD5';
 
 import { JwtService } from '@nestjs/jwt'
 import { snid } from 'src/common/util/SnowflakeID';
+import { CacheService } from 'src/common/cache/cache.service';
+import { RedisService } from 'nestjs-redis';
 
 @Injectable()
 export class UserService extends BaseService<UserEntity> {
@@ -18,6 +20,7 @@ export class UserService extends BaseService<UserEntity> {
 
     @Inject('USER_REPOSITORY')
     private readonly userRepository: Repository<UserEntity>,
+    private readonly redisService: RedisService
   ) {
     super();
   }
@@ -40,6 +43,11 @@ export class UserService extends BaseService<UserEntity> {
 
 
   async validAccount(username: string, password: string) {
+
+    var cache = new CacheService(this.redisService);
+    await cache.set('username', '张三');
+    let test = await cache.get('username');
+    console.log('test: ' + test);
 
     let result = await this.userRepository.findOne({
       where: {

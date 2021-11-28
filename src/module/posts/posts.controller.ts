@@ -1,6 +1,5 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put, Query, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { Length } from 'class-validator';
 import { BaseController } from 'src/common/controller/baes.controller';
 import { CreatePostsDto } from './dto/create-posts.dto';
 import { PagePostsDto } from './dto/page-posts.dto';

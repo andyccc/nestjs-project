@@ -8,6 +8,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { JwtConstants } from 'src/config/constatns';
 import { JwtStrategy } from './jwt.strategy';
 import { LocalStrategy } from './local.strategy';
+import { CacheService } from 'src/common/cache/cache.service';
 
 @Module({
   imports: [
@@ -16,12 +17,15 @@ import { LocalStrategy } from './local.strategy';
       secret: JwtConstants.secret,
       signOptions: { expiresIn: '20s' }
     }),
-    DatabaseModule],
+    DatabaseModule,
+
+  ],
   controllers: [UserController],
   providers: [
     ...userProviders,
     UserService,
     LocalStrategy, JwtStrategy
+
   ]
 })
 export class UserModule { }

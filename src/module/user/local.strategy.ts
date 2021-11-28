@@ -5,7 +5,6 @@ import { UserService } from "./user.service";
 
 
 @Injectable()
-
 export class LocalStrategy extends PassportStrategy(Strategy) {
     constructor(private readonly userService: UserService) {
         super();
@@ -13,8 +12,8 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
 
     async validate(username: string, password: string) {
         // AuthGuard('local') passed direct return object
-        // 
-        console.log(username, password, 'username,password')
+
+        console.log('LocalStrategy: username : ' + username + ', password: ' + password);
         return { username, password }
 
         // or to valid username and password info and return object
@@ -26,9 +25,6 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
             }, HttpStatus.BAD_REQUEST);
         }
         return user;
-
-
-
     }
 
 
