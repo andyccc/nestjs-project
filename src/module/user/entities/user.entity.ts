@@ -1,3 +1,4 @@
+import { Exclude } from "class-transformer";
 import { MyBaseEntity } from "src/common/entities/base.entity";
 import { Column, Entity, UpdateDateColumn } from "typeorm";
 
@@ -16,6 +17,7 @@ export class UserEntity extends MyBaseEntity {
         length: 50,
         comment: 'password field'
     })
+    @Exclude({ toPlainOnly: true })
     password: string
 
     @Column({

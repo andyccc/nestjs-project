@@ -12,9 +12,13 @@ import { TransformInterceptor } from './common/interceptors/transform.intercepto
 
 // import swagger document helper
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+// import { Logger } from 'nestjs-pino';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+
+  // app.useLogger(app.get(Logger));
 
   app.useGlobalPipes(new ValidationPipe());
 

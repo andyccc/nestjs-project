@@ -81,8 +81,8 @@ export class UserService extends BaseService<UserEntity> {
     return `This action returns all user`;
   }
 
-  findOne(id: string) {
-    return `This action returns a #${id} user`;
+  findOne(id: string): Promise<UserEntity> {
+    return this.userRepository.findOne({ id: id, is_valid: true });
   }
 
   update(id: string, updateUserDto: UpdateUserDto) {

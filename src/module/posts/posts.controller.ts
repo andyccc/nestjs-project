@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put, Query, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Request, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put, Query, UseGuards, UsePipes, ValidationPipe, Req } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { BaseController } from 'src/common/controller/baes.controller';
 import { CreatePostsDto } from './dto/create-posts.dto';
@@ -34,6 +34,7 @@ export class PostsController extends BaseController {
     @Get(':id')
     @ApiOperation({ summary: 'detail posts ' })
     async detail(@Param('id') id: string) {
+
         if (!id || id.length == 0) this.missingParam(id);
         let result = await this.postsService.findPostsById(id);
 

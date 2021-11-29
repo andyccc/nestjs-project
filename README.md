@@ -60,6 +60,7 @@ $ npm run test:cov
 
 ## Swagger api chages
 
+```
 Migration to 4.0#
 If youre currently using @nestjs/swagger@3.*, note the following breaking/API changes in version 4.0.
 
@@ -75,9 +76,18 @@ The following decorators have been changed/renamed:
 @ApiOperation({ title: test }) is now@ApiOperation({ summary: test }),
 @ApiUseTags is now @ApiTags
 
+```
+
 ## Bugs
 fix nestjs redis :
 https://github.com/skunight/nestjs-redis/issues/82
+
+## Other
+traceid :
+npm i nestjs-pino pino-http
+
+
+
 
 ## Support
 

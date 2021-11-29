@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpStatus, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpStatus, UseGuards, Req, UseInterceptors, ClassSerializerInterceptor } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -8,10 +8,13 @@ import { LoginUserDto } from './dto/login-user.dto';
 import { NoAuth } from 'src/common/decorator/customize';
 import { AuthGuard } from '@nestjs/passport';
 import { CacheService } from 'src/common/cache/cache.service';
+import { BaseController } from 'src/common/controller/baes.controller';
 
 @Controller('user')
-export class UserController {
-  constructor(private readonly userService: UserService) { }
+export class UserController extends BaseController {
+  constructor(private readonly userService: UserService) {
+    super();
+  }
 
   @Post('create')
   @NoAuth()
@@ -46,6 +49,13 @@ export class UserController {
     return { token: result.data };
   }
 
+  @Get('profile')
+  async getProfile(@Req() req) {
+    // jwt' user info  from req.user get 
+    let result = await this.userService.findOne(req.user.id);
+    result.password = null;
+    return result;
+  }
 
   @Get()
   findAll() {

@@ -12,6 +12,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     constructor(private readonly jwtService: JwtService) {
         super({
             jwtFromRequest: ExtractJwt.fromHeader('token'),
+            // jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
             ignoreExpiration: true,
             secretOrKey: JwtConstants.secret,
         });
@@ -19,7 +20,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
     validate(payload: any) {
         console.log('JwtStrategy: payload: ' + JSON.stringify(payload));
-        return { userId: payload.sub, username: payload.username };
+        return { id: payload.id, username: payload.username };
     }
 
 }

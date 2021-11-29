@@ -9,6 +9,8 @@ import { JwtConstants } from 'src/config/constatns';
 import { JwtStrategy } from './jwt.strategy';
 import { LocalStrategy } from './local.strategy';
 import { CacheService } from 'src/common/cache/cache.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserEntity } from './entities/user.entity';
 
 @Module({
   imports: [
@@ -18,7 +20,7 @@ import { CacheService } from 'src/common/cache/cache.service';
       signOptions: { expiresIn: '20s' }
     }),
     DatabaseModule,
-
+    // TypeOrmModule.forFeature([UserEntity])
   ],
   controllers: [UserController],
   providers: [

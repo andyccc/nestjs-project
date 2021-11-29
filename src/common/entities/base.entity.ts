@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Exclude, Transform, Type } from "class-transformer";
+import { Column, CreateDateColumn, PrimaryColumn, UpdateDateColumn } from "typeorm"
 
 // @Entity()
 export class MyBaseEntity {
@@ -25,6 +26,7 @@ export class MyBaseEntity {
         default: true,
         comment: 'is enable field'
     })
+    @Exclude({ toPlainOnly: true })
     is_valid: boolean
 
     @CreateDateColumn({
@@ -39,6 +41,7 @@ export class MyBaseEntity {
         nullable: true,
         type: 'datetime'
     })
+    @Type(() => Date)
     update_time: Date;
 
     @Column({
