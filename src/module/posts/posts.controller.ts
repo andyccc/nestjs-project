@@ -20,7 +20,6 @@ export class PostsController extends BaseController {
     @ApiOperation({ summary: 'find page posts' })
     @UsePipes(new ValidationPipe({ transform: true }))
     pageList(@Query() param: PagePostsDto) {
-        console.log(param);
         return this.postsService.findListByPage(param);
     }
 
@@ -73,7 +72,6 @@ export class PostsController extends BaseController {
         var posts = new PostsEntity()
         posts.id = id;
         let result = await this.postsService.softDeletePosts(posts);
-        console.log('result : ' + result);
         return { count: result, id: id };
     }
 }

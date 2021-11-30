@@ -5,7 +5,7 @@ import { DatabaseModule } from 'src/common/db/database.module';
 import { userProviders } from './user.providers';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
-import { JwtConstants } from 'src/config/constatns';
+import { JwtConstants } from 'config/constatns';
 import { JwtStrategy } from './jwt.strategy';
 import { LocalStrategy } from './local.strategy';
 import { CacheService } from 'src/common/cache/cache.service';

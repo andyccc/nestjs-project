@@ -2,7 +2,7 @@ import { Inject, Injectable, Post } from '@nestjs/common';
 import { min } from 'class-validator';
 import { PageData } from 'src/common/page/page.dto';
 import { BaseService } from 'src/common/service/base.service';
-import { snid } from 'src/common/util/SnowflakeID';
+import { snid } from 'src/common/utils/SnowflakeID';
 import { Repository } from 'typeorm';
 import { PagePostsDto } from './dto/page-posts.dto';
 import { PostsEntity } from './entities/posts.entity';

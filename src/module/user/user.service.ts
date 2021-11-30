@@ -5,12 +5,13 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserEntity } from './entities/user.entity';
 
-import { getSaltPassword } from 'src/common/util/MD5';
+import { getSaltPassword } from 'src/common/utils/MD5';
 
 import { JwtService } from '@nestjs/jwt'
-import { snid } from 'src/common/util/SnowflakeID';
+import { snid } from 'src/common/utils/SnowflakeID';
 import { CacheService } from 'src/common/cache/cache.service';
 import { RedisService } from 'nestjs-redis';
+import { ApiErrorCode } from 'src/common/enums/api-error-code.enum';
 
 @Injectable()
 export class UserService extends BaseService<UserEntity> {
@@ -28,7 +29,7 @@ export class UserService extends BaseService<UserEntity> {
   async create(createUserDto: CreateUserDto) {
     var user = await this.userRepository.findOne({ username: createUserDto.username, is_valid: true });
     if (user) {
-      return { status: false, message: 'username was registered!' }
+      return { status: false, message: 'username was registered!', code: ApiErrorCode.USER_ACCOUNT_REGISTERED }
     }
 
     user = new UserEntity;
@@ -60,7 +61,7 @@ export class UserService extends BaseService<UserEntity> {
     if (result) {
       return this.loginAccount(result);
     } else {
-      return { status: false, message: 'username or password is incorrect', data: null };
+      return { status: false, message: 'username or password is incorrect', data: null, code: ApiErrorCode.USER_ACCOUNT_OR_PASSWORD_INVALID };
     }
 
   }
@@ -73,6 +74,7 @@ export class UserService extends BaseService<UserEntity> {
       status: true,
       data: token,
       message: null,
+      code: null,
     }
   }
 

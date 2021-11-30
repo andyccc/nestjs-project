@@ -31,6 +31,8 @@
     "@nestjs/typeorm": "^8.0.2",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.2",
+    "log4js": "^6.3.0",
+    "moment": "^2.29.1",
     "mysql2": "^2.3.3",
     "nestjs-pino": "^2.3.1",
     "nestjs-redis": "git+https://github.com/skunight/nestjs-redis.git",
@@ -40,6 +42,7 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
+    "stacktrace-js": "^2.0.2",
     "swagger-ui-express": "^4.1.6",
     "typeorm": "^0.2.41"
   },

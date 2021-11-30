@@ -1,5 +1,5 @@
 import { MyBaseEntity } from "src/common/entities/base.entity";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity } from "typeorm";
 
 
 @Entity()

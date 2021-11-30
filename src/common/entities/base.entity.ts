@@ -1,5 +1,6 @@
-import { Exclude, Transform, Type } from "class-transformer";
+import { Exclude, Transform, TransformFnParams, Type } from "class-transformer";
 import { Column, CreateDateColumn, PrimaryColumn, UpdateDateColumn } from "typeorm"
+import { getStandardDateTime } from "../utils/timeutil";
 
 // @Entity()
 export class MyBaseEntity {
@@ -34,14 +35,17 @@ export class MyBaseEntity {
         nullable: true,
         type: 'datetime'
     })
+    @Transform(({ value }) => getStandardDateTime(value), { toPlainOnly: true })
     create_date: Date
 
+    // moment use see : https://momentjs.com/docs/#/parsing/special-formats/
+    @Transform(({ value }) => getStandardDateTime(value), { toPlainOnly: true })
     @UpdateDateColumn({
         name: 'update_time',
         nullable: true,
         type: 'datetime'
     })
-    @Type(() => Date)
+    @Type(() => String)
     update_time: Date;
 
     @Column({
@@ -59,5 +63,7 @@ export class MyBaseEntity {
         length: 30,
     })
     update_user_id: string
+
+
 
 }

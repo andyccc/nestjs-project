@@ -1,5 +1,6 @@
-import { Exclude } from "class-transformer";
+import { Exclude, Transform } from "class-transformer";
 import { MyBaseEntity } from "src/common/entities/base.entity";
+import { getStandardDateTime } from "src/common/utils/timeutil";
 import { Column, Entity, UpdateDateColumn } from "typeorm";
 
 @Entity()
@@ -28,8 +29,12 @@ export class UserEntity extends MyBaseEntity {
     email: string
 
     @UpdateDateColumn({
-        name: 'login_date'
+        name: 'login_date',
+        type: 'datetime'
     })
+
+    @Transform(({ value }) => getStandardDateTime(value), { toPlainOnly: true })
+
     login_date: Date
 
     @Column({

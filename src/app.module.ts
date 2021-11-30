@@ -11,7 +11,7 @@ import { APP_FILTER, APP_GUARD } from '@nestjs/core';
 import { RoleAuthGuard } from './common/guard/role.auth.guard';
 // import { AllExceptionsFilter } from '@all-exception.filter';
 // import { RoleAuthGuard } from '@/auth/guards/role-auth.guard';
-import customConfig from './config';
+import customConfig from 'config';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({

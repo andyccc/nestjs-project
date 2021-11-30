@@ -26,6 +26,9 @@ async function bootstrap() {
 
   app.useGlobalInterceptors(new TransformInterceptor());
 
+  // app.setGlobalPrefix('api')
+  app.enableCors() // 启用允许跨域
+
   const config = new DocumentBuilder()
     .setTitle('nest user api example')
     .setDescription('The nest user api description')
