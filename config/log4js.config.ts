@@ -2,7 +2,6 @@
 import * as path from 'path';
 const baseLogPath = path.resolve(__dirname, '../../logs');
 
-
 const log4jsConfig = {
     appenders: {
         console: { type: 'console' },	// 控制打印至控制台

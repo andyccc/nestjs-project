@@ -1,5 +1,5 @@
 import { Exclude, Transform } from "class-transformer";
-import { MyBaseEntity } from "src/common/entities/base.entity";
+import { MyBaseEntity } from "src/common/entities/base_entity";
 import { getStandardDateTime } from "src/common/utils/timeutil";
 import { Column, Entity, UpdateDateColumn } from "typeorm";
 

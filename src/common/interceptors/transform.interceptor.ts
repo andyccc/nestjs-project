@@ -2,10 +2,11 @@
  * see more detail at : https://docs.nestjs.com/interceptors#interceptors
  */
 
-import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from "@nestjs/common";
+import { CallHandler, ExecutionContext, HttpCode, Injectable, NestInterceptor } from "@nestjs/common";
 import { map, Observable } from "rxjs";
 import { ApiErrorCode } from "../enums/api-error-code.enum";
 import { Logger } from "../utils/log4js";
+import { formatReq } from "../utils/request.format";
 
 @Injectable()
 export class TransformInterceptor implements NestInterceptor {
@@ -17,54 +18,29 @@ export class TransformInterceptor implements NestInterceptor {
         return next.handle().pipe(
             map(data => {
 
-                const logFormat = JSON.stringify({
-                    IP: req.ip,
-                    user: `${req.user}`,
-                    res_url: req.originalUrl,
-                    res_method: req.method,
-                    res_data: data,
-                })
-                Logger.info(logFormat);
-                Logger.access(logFormat);
-
-
-
-
-
-
-                return {
+                const result = {
                     data,
                     code: ApiErrorCode.SUCCESS,
                     message: 'success',
-                }
+                };
+
+                const logFormat = JSON.stringify({
+                    IP: req.ip,
+                    res_method: req.method,
+                    res_url: req.originalUrl,
+                    user: req.user ? req.user : {},
+                    header: req.headers ? req.headers : {},
+                    body: req.body ? req.body : {},
+                    res_data: result,
+                })
+
+                // const logFormat = formatReq(req, 200, result, req.user);
+
+                Logger.info(logFormat);
+                Logger.access(logFormat);
+                return result;
             })
         );
     }
 
 }
-
-// log :
-
-
-// info: 2019-07-25 18:04:36
-//     POST /v1.0/standard
-//     Query:
-//         search: keyword
-//     Header:
-//         cache-control: no-cache
-//         postman-token: f4103067-4b07-447d-9fab-f09a75b6ddda
-//         content-type: application/json
-//         user-agent: PostmanRuntime/3.0.11-hotfix.2
-//         accept: */*
-//         host: localhost:4000
-//         accept-encoding: gzip, deflate
-//         content-length: 209
-//         connection: keep-alive
-//     Body:
-//         appId: XXX
-//         data:
-//             userId: 123
-//             requestId: 456
-//         timestamp: 0
-
-

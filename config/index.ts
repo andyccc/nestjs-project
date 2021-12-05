@@ -1,12 +1,15 @@
-import developmentConfig from './development';
-// import testConfig from './test';
-// import productionConfig from './production';
 
-const configs = {
-    development: developmentConfig,
-    // test: testConfig,
-    // production: productionConfig,
+
+
+import * as dev from './dev.env';
+import * as prod from './prod.env';
+
+
+const envconfigs = {
+    development: dev,
+    production: prod,
 };
-const env = process.env.NODE_ENV || 'development';
 
-export default () => configs[env];
+const environment = envconfigs[process.env.NODE_ENV || 'development']
+
+export { environment };

@@ -86,7 +86,23 @@ https://github.com/skunight/nestjs-redis/issues/82
 traceid :
 npm i nestjs-pino pino-http
 
+start:
 
+  package.json
+    {
+      ...
+      "scripts": {
+        "start": "cross-env NODE_ENV=development nest start | pino-colada ",
+        "start:dev": "webpack --config webpack.config.js",
+        "start:prod": "cross-env NODE_ENV=production node dist/main",
+      },
+      ...
+    }
+
+logger config
+https://www.imaegoo.com/2019/http-log/
+https://blog.csdn.net/fwzzzzz/article/details/116160816
+https://iiong.com/nestjs-opens-static-web-services-and-creates-a-log-system/
 
 
 ## Support

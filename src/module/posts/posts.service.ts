@@ -11,6 +11,7 @@ import { PostsEntity } from './entities/posts.entity';
 export class PostsService extends BaseService<PostsEntity>{
     constructor(
         @Inject('POSTS_REPOSITORY')
+        // @Inject(PostsEntity)
         private postsRepository: Repository<PostsEntity>,
     ) {
         super();

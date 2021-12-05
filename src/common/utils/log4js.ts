@@ -156,15 +156,15 @@ export class Logger {
 // 自定义typeorm 日志器, 可参考 https://blog.csdn.net/huzzzz/article/details/103191803/
 export class DbLogger implements Logger {
     logQuery(query: string, parameters?: any[], queryRunner?: QueryRunner) {
-        mysqlLogger.info(query);
+        mysqlLogger.info(query, '; parameters =>', parameters ? parameters : []);
     }
 
     logQueryError(error: string, query: string, parameters?: any[], queryRunner?: QueryRunner) {
-        mysqlLogger.error(query, error);
+        mysqlLogger.error(query, '; parameters =>', parameters ? parameters : [], error);
     }
 
     logQuerySlow(time: number, query: string, parameters?: any[], queryRunner?: QueryRunner) {
-        mysqlLogger.info(query, time);
+        mysqlLogger.info(query, '; parameters =>', parameters ? parameters : [], time);
     }
 
     logSchemaBuild(message: string, queryRunner?: QueryRunner) {

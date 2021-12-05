@@ -12,16 +12,23 @@ import { snid } from 'src/common/utils/SnowflakeID';
 import { CacheService } from 'src/common/cache/cache.service';
 import { RedisService } from 'nestjs-redis';
 import { ApiErrorCode } from 'src/common/enums/api-error-code.enum';
+import { InjectRepository } from '@nestjs/typeorm';
+
 
 @Injectable()
 export class UserService extends BaseService<UserEntity> {
+  // @Inject('USER_REPOSITORY')
+  // private readonly userRepository: Repository<UserEntity>;
+
+
   constructor(
-
     private readonly jwtService: JwtService,
-
     @Inject('USER_REPOSITORY')
     private readonly userRepository: Repository<UserEntity>,
-    private readonly redisService: RedisService
+
+    // @InjectRepository(UserEntity)
+    // private readonly userRepository: Repository<UserEntity>,
+    private readonly redisService: RedisService,
   ) {
     super();
   }
@@ -44,6 +51,11 @@ export class UserService extends BaseService<UserEntity> {
 
 
   async validAccount(username: string, password: string) {
+
+    console.log('UserEntity.name = ' + UserEntity.name);
+
+
+    console.log('redis test ...');
 
     var cache = new CacheService(this.redisService);
     await cache.set('username', '张三');

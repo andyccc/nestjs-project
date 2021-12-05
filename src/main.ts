@@ -12,17 +12,23 @@ import { TransformInterceptor } from './common/interceptors/transform.intercepto
 
 // import swagger document helper
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { AllExceptionsFilter } from './common/filters/any-exception.filter';
+// import { logger } from './common/middleware/logger.middleware';
 // import { Logger } from 'nestjs-pino';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  // app.useLogger(logger)
 
   // app.useLogger(app.get(Logger));
 
   app.useGlobalPipes(new ValidationPipe());
 
-  app.useGlobalFilters(new HttpExceptionFilter());
+  // app.useGlobalFilters(new HttpExceptionFilter());
+
+  app.useGlobalFilters(new AllExceptionsFilter());
+
 
   app.useGlobalInterceptors(new TransformInterceptor());
 
